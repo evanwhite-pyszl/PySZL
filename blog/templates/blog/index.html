@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Overview</title>
+    <style type="text/css" media="screen">
+        div.postbox {
+            position: center;
+            height: 50%;
+            width: 70%;
+            border: 1px solid black;
+            background-color: lightgrey;
+            padding: 10px;
+            margin: 20px;
+        }
+        a.posttitle {
+            color: blue;
+            font-family: Courier;
+            font-size: 20pt;
+            text-align: left;
+        }
+        div.posttext {
+            color: black;
+            font-family: Courier;
+            font-size: 12pt;
+            text-align: justify;
+        }
+        div.timestamp {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+{% if latest_post_list %}
+        {% for post in latest_post_list %}
+        <div class="postbox">
+                <a class="posttitle" href="{% url 'blog:post' post.id %}">{{ post.post_title }}</a>
+                <div class="timestamp">{{ post.pub_date }}</div>
+                <div class="posttext">
+                    <p>{{ post.post_text }}</p>
+                </div>
+        </div>
+        {% endfor %}
+
+
+{% else %}
+    <p>No posts yet.</p>
+{% endif %}
+</body>
+</html>
